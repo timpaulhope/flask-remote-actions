@@ -21,7 +21,7 @@ def do_a_thing():
         # Run the 'home assistant' shell script using subprocess
         subprocess.run(['/bin/bash', '/path/to/haupdate_script.sh'])
 
-        # Assume naively that script has run successfully 
+        # Assumes naively that script has run successfully 
         return 'haupdate script executed successfully!'
     
     else:

@@ -6,6 +6,22 @@ This Flask API provides an endpoint to execute different shell scripts on a linu
 **Example of action buttons created in a [Home Assistant](https://www.home-assistant.io/) dashboard that post to the api**
 
 ![alt text](/img/haButtons.PNG)
+
+**Home Assistant Config entry to create rest command**
+```yaml
+rest_command: 
+  pxrestart:
+    url: http://192.168.20.20:9025/
+    method: POST
+    payload: '{"what": "pxrestart"}'
+    content_type:  'application/json; charset=utf-8'
+  haupgrade:
+    url: http://192.168.20.20:9025/
+    method: POST
+    payload: '{"what": "haupdate"}'
+    content_type:  'application/json; charset=utf-8'
+```
+
 ## Requirements
 
 - Python 3.x
@@ -44,14 +60,18 @@ The shell script related to the action word will be triggered, and the API will 
 
 If the action word is not known, the API will return a message stating that the word is not recognized.
 
+It is reccomended that you try calling the api while it is running in terminal just to check that you are connecting in and the scripts are triggering.  
+
 To stop the Flask API, press `Ctrl+C` in the command-line interface session running the app on the host machine.
 
 ## Usage - Run in background on startup
 
 Once you are happy it is behaving as expected, to run the script in the background on startup, add the following to your crontab.
 
+**Note:** If your script need elevated (sudo) privledges, you will need to do some research on how to whitelist the script so it can run without needing to enter a password.
+
 ```shell
-# Run monitor.py a minute after startup
+# Run flask-remote-action.py a minute after startup
 @reboot sleep 60 && /usr/bin/python3 /path/to/flask-remote-action.py & 
 ```
 ## Customization
