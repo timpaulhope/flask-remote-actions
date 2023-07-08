@@ -12,24 +12,21 @@ def do_a_thing():
     
     if what == 'pxrestart':
         # Run the 'restart plex' shell script using subprocess
-        # NOTE: This script requires root permissions to run
-        # A web search for `linux run sudo without password` will give you options
-        # to consider to achieve this
-        subprocess.run(['/bin/bash', 'sudo /path/to/pxrestart_script.sh'])
+        subprocess.run(['/bin/bash', '/path/to/pxrestart_script.sh'])
         
         # Assumes naively that the script has run successfully 
         return 'pxrestart script executed successfully!'
     
     elif what == 'haupdate':
         # Run the 'home assistant' shell script using subprocess
-        subprocess.run(['/bin/bash', 'sudo /path/to/haupdate_script.sh'])
+        subprocess.run(['/bin/bash', '/path/to/haupdate_script.sh'])
 
         # Assume naively that script has run successfully 
         return 'haupdate script executed successfully!'
     
     else:
         # notify user of values when unexpected `what` sent
-        return 'Unkown action word ' + what + ' recieved. Contact admin for the list of valid action words.'
+        return 'Unknown action word ' + what + ' recieved. Contact admin for the list of valid action words.'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=9025)
